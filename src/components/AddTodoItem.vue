@@ -3,7 +3,7 @@
     <ion-header class="toolbar-md-primary">
 
       <ion-toolbar>
-        <ion-title>Add Item</ion-title>
+        <ion-title>Tambah makanan</ion-title>
       </ion-toolbar>
 
     </ion-header>

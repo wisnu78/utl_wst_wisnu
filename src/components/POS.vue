@@ -14,7 +14,7 @@
         <ion-input :value="model.name" @input="changeInput('name')" ref="name" placeholder="Atas nama"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input :value="harga" @input="changeInput('harga')" ref="harga" placeholder="Harga"></ion-input>
+        <ion-input :value="model.harga" @input="changeInput('harga')" ref="harga" placeholder="Harga"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input :value="model.bayar" @input="changeInput('bayar')" ref="bayar" placeholder="Bayar"></ion-input>
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import {db} from './../db'
+import {db} from './../db';
+import axios from 'axios';
 export default {
   data(){
     return {
@@ -74,6 +75,7 @@ export default {
       }
     },
     addData(){
+      // alert("ass");
       let self = this;
        db.collection("transaksi").add({
            name:self.model.name,
@@ -84,12 +86,36 @@ export default {
         })
       .then(function() {
           // console.log("Document written with ID: ", docRef.id);
-          self.$router.push({path: '/daftar_makanan'})
+          self.pushNotif();
       })
       .catch(function(error) {
         alert(error);
           // console.error("Error adding document: ", error);
       });
+    },
+    pushNotif(){
+      let self = this;
+      let a = {
+                "app_id":"160686ed-7945-47d7-8cad-7cc313c02b7a",
+                "included_segments":["Active Users", "Inactive Users"],
+                "headings":{"en":"Pesanan"},
+                "contents":{"en":"Pesanan barus atas nama " + self.model.name},
+                "data":{"task":"OK"}
+              };
+      axios({
+        method:"POST",
+        url:'https://onesignal.com/api/v1/notifications',
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization':"Basic NTc4NTM2NDktODc2MC00ZDBiLWEwMzAtNTc0ZWQ5YzYzZmZk"
+        },
+        data:a
+      })
+      .then(()=>{
+        // alert(res.data.id);
+            self.$router.push({path: '/daftar_makanan'});
+      })
+      .catch(err=>alert(err));
     }
   }
 }

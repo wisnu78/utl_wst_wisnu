@@ -3,7 +3,7 @@
     <ion-header>
 
       <ion-toolbar class="toolbar-md-primary">
-        <ion-title>Daftar Makanan</ion-title>
+        <ion-title>Daftar Makanan Update</ion-title>
       </ion-toolbar>
 
     </ion-header>
@@ -12,11 +12,10 @@
       <ion-list>
         <ion-item v-for="(item,index) in read" :key="index">
             <!-- {{ item.title }} -->
-            <Item>
+            <Item :item="item">
               <template v-slot:slot-add>
                 <ion-col class="col" text-center="">
                   <button @click="add(item)" clear="" color="danger" icon-start="" ion-button="" small="" class="disable-hover button button-md button-clear button-clear-md button-small button-small-md button-clear-md-danger"><span class="button-inner">
-                    <ion-icon name="musical-notes" role="img" class="icon icon-md ion-md-musical-notes" aria-label="musical notes"></ion-icon>
                     Tambah
                   </span><div class="button-effect"></div></button>
                 </ion-col>
@@ -69,9 +68,9 @@ export default {
     },
     addData(){
       db.collection("daftar_makanan").add({
-         title:"wisnu",
-         harga:9000,
-         note:"pppppp",
+         title:"Nasi Warteg",
+         harga:100000,
+         note:"Tanpa Warteg",
          url:"http"
       })
       .then(function(docRef) {

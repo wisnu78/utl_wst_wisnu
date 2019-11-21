@@ -3,11 +3,10 @@
     <img src="https://via.placeholder.com/150" style="height:300px !important"/>
     <ion-card-content>
       <ion-card-title>
-        Nine Inch Nails Live
+       {{ item.title }}
         </ion-card-title>
       <p>
-        The most popular industrial group ever, and largely
-        responsible for bringing the music to a mass audience.
+       {{ item.note }}
       </p>
     </ion-card-content>
     <ion-row class="row" no-padding="">
@@ -15,3 +14,8 @@
     </ion-row>
   </ion-card>
 </template>
+<script>
+export default {
+  props:['item']
+}
+</script>
